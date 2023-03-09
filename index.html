@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Kod Olusturucu</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div class="container ">
+        <header >
+            <h1>QR kod Olusturucu</h1>
+            <p style="color: rgba(0, 0, 0, 0.577);">Url vey Metin girerek QR kod oluşturun.</p>
+            
+        </header>
+        <div class="form">
+            <input  type="text" placeholder="Url veya Metin Giriniz.">
+            <button>QR kod Oluştur</button>
+        </div>
+        <div class="qr-code">
+        <img src="" >
+    </div>
+    </div>
+    
+    <script>
+        const container = document.querySelector(".container")
+        const Input = document.querySelector(".form input")
+        const Btn = document.querySelector(".form button")
+        const Img = document.querySelector(".qr-code img")
+
+        var preValue;
+
+      Btn.addEventListener("click",function(){
+        var qrValue =Input.value.trim();
+        if(!qrValue || preValue===qrValue)return;
+        preValue = qrValue;
+        Btn.innerText = "QR kod oluşturuluyor..."
+        Img.src =`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${qrValue}`;
+        Img.addEventListener("load",function(){
+            container.classList.add("active")
+            Btn.innerText = "QR kod oluştur"
+
+
+        })
+      })
+
+
+    </script>
+    
+</body>
+</html>
